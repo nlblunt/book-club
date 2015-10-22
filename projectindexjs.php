@@ -56,9 +56,24 @@
                     {{book.volumeInfo.description}}
                 </div>
                 
-                <!-- Right column, 6 wide -->
+                <!-- Right column, 7 wide -->
                 <div class="col-md-7">
                     <h3>Books I've Read</h3>
+                    
+                  <input ng-model="read_search.volumeInfo.title" type="text">
+                  
+                  <table id="read-books">
+                    <div ng-repeat="book in books | filter: read_search | limitTo: 5">  
+                    <tr>
+                        <td rowspan="2"><img ng-src='{{book.volumeInfo.imageLinks.thumbnail}}'><td>
+                        <td>{{book.volumeInfo.title}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{book.volumeInfo.author}}</td>
+                      </tr>
+                    </div>
+                  </table>
+                  
                     <input ng-model="read_search.volumeInfo.title" type="text">
                     <div ng-repeat="book in books | filter: read_search | limitTo: 5">
                         <p>Title: {{book.volumeInfo.title}}</p>
