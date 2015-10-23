@@ -4,6 +4,7 @@
 	[
 		//'ngRoute',
 		//'ngResource',
+		'ngAnimate',
 		'appControllers',
 		'appServices'
 	]);

@@ -15,6 +15,7 @@
     <!-- Start AngularJS -->
     <!-- <script src="../AngularJS/angular-1.4.7/angular.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
@@ -58,26 +59,22 @@
                 
                 <!-- Right column, 7 wide -->
                 <div class="col-md-7">
-                    <h3>Books I've Read</h3>
-                    
-                  <input ng-model="read_search.volumeInfo.title" type="text">
+                    <h3 class="text-center">Books I've Read</h3>
+                    <p class="text-center">
+                        <a href ng-click="searchShowRead()">Search</a>
+                        <a href ng-click="showAllRead()">Show All</a>
+                    </p>
+                    <!-- Show search bar -->
+                    <input ng-if="search_show_read" class="form-control" ng-model="read_search.volumeInfo.title" type="text">
                   
-                  <table id="read-books">
-                    <div ng-repeat="book in books | filter: read_search | limitTo: 5">  
-                    <tr>
-                        <td rowspan="2"><img ng-src='{{book.volumeInfo.imageLinks.thumbnail}}'><td>
-                        <td>{{book.volumeInfo.title}}</td>
-                      </tr>
-                      <tr>
-                        <td>{{book.volumeInfo.author}}</td>
-                      </tr>
-                    </div>
+                  <!-- Show only if 'show_all_read' is not selected.  Only show the last 5 books or narrow with search -->
+                  <table ng-hide="show_all_read" id="read-books">
+                    <tr class="animate-repeat" ng-repeat="book in books | filter: read_search | limitTo: 5">
+                        <td class="read_books"><img class="animate-repeat" ng-src='{{book.volumeInfo.imageLinks.thumbnail}}'><td>
+                        <td class="align_top"><p><span class="book_title">{{book.volumeInfo.title}}</span><br>
+                            {{book.volumeInfo.authors[0]}}</p></td>
+                    </tr>
                   </table>
-                  
-                    <input ng-model="read_search.volumeInfo.title" type="text">
-                    <div ng-repeat="book in books | filter: read_search | limitTo: 5">
-                        <p>Title: {{book.volumeInfo.title}}</p>
-                    </div>
                     
                     SEARCH
                     <input ng-model="search" ng-change="searchBooks()" ng-model-options="{debounce: 1000}" type="text"></input>
