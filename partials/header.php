@@ -9,6 +9,8 @@
                         <label>Password</label>
                         <input type="password" class="form-control">
                     </div>
+                    
+                    <p class="text-center">New to this? <a href> Sign Up Now</a></p>
                 </form>
-                <p class="text-center">New to this? <a href> Sign Up Now</a></p>
+
             </header>

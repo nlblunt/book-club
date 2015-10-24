@@ -33,4 +33,14 @@ appControllers.controller('homeController', ['$scope', 'goodReads', function($sc
             $scope.results = result;
         });
     };
+    
+    $scope.searchShowRead = function()
+    {
+        $scope.search_show_read = true;
+    };
+    
+    $scope.cancelSearchShowRead = function()
+    {
+        $scope.search_show_read = false;
+    };
 }]);
