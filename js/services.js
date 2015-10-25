@@ -1,7 +1,33 @@
 //Initialize the angularJS services
 var appServices = angular.module('appServices', []);
 
-appServices.service('goodReads', function($http, $q)
+appServices.service('bcs', function($http, $q)
+{
+    //Check to see if user is signed in
+    this.user_check = function()
+    {
+        var defer = $q.defer();
+        
+        $http.get('http://bcs.rubywebs.net/user_check')
+        .then(function(result)
+        {
+            defer.resolve(result);
+        },
+        function(result)
+        {
+            defer.reject(result);
+        });
+        
+        return defer.promise;
+    };
+    
+    this.create_user = function()
+    {
+        
+    };
+});
+
+appServices.service('googleBooks', function($http, $q)
 {
     this.book_by_name = function(book_name)
     {
@@ -15,11 +41,11 @@ appServices.service('goodReads', function($http, $q)
              (function(result)
              {
                  defer.resolve(result.data.items);
-             }),
+             },
              function(result)
              {
                  console.log(result);  
-             };
+             });
              
              return defer.promise;
     };

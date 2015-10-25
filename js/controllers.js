@@ -4,13 +4,21 @@ var appControllers = angular.module('appControllers', ['appServices']);
 /* Create the controllers for projectApp */
 
 //Controller for home
-appControllers.controller('homeController', ['$scope', 'goodReads', function($scope, goodReads)
+appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', function($scope, googleBooks, bcs)
 {
     //Set initial signed_in status = false
-    $scope.signed_in = true;
+    $scope.signed_in = false;
 
+    //Check to see if user is signed in
+    bcs.user_check()
+    .then(function(result)
+    {
+        console.log(result);
+        $scope.signed_in = true;
+    });
+    
     //test api call
-    goodReads.book_by_id("xQxhQgAACAAJ")
+    googleBooks.book_by_id("xQxhQgAACAAJ")
     .then(function(result)
     {
         //console.log(result[0].volumeInfo);
@@ -18,7 +26,7 @@ appControllers.controller('homeController', ['$scope', 'goodReads', function($sc
         console.log($scope.book);
     });
     
-    goodReads.book_by_name("Harry Potter")
+    googleBooks.book_by_name("Harry Potter")
     .then(function(result)
     {
         $scope.books = result;
@@ -27,7 +35,7 @@ appControllers.controller('homeController', ['$scope', 'goodReads', function($sc
 
     $scope.searchBooks = function()
     {
-        goodReads.book_by_name($scope.search)
+        googleBooks.book_by_name($scope.search)
         .then(function(result)
         {
             $scope.results = result;

@@ -1,4 +1,4 @@
-             <nav>
+             <nav class="hidden-print">
                 <ul id="nav">
                     <li class="text-center"><img ng-src="images/red-book.png"><br>
                     Add Book</li>

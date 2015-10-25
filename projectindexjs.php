@@ -46,43 +46,15 @@
             <!-- Row for main content -->
             <div class="row" id="main_content">
                 
-                <!-- Left column, 5 col wide -->
-                <section class="col-md-5">
-                    <?php include("partials/current_book.php"); ?>
-                </section>
-                
-                <!-- Right column, 7 wide -->
-                <section class="col-md-7">
-                    <h3 class="text-center">Books I've Read</h3>
-                    <p class="text-center">
-                        <a href ng-click="searchShowRead()">Search</a>
-                        <a href ng-click="showAllRead()">Show All</a>
-                    </p>
-                    
-                    <!-- Show search bar -->
-                    <div ng-show="search_show_read">
-                        <input class="form-control" ng-model="read_search.volumeInfo.title" type="text">
-                        <a href ng-click="cancelSearchShowRead()" class="text-center">Cancel Search</a>
-                    </div>
-                  
-                  <!-- Show only if 'show_all_read' is not selected.  Only show the last 5 books or narrow with search -->
-                  <table ng-hide="show_all_read" id="read-books">
-                    <tr class="animate-repeat" ng-repeat="book in books | filter: read_search | limitTo: 5">
-                        <td class="read_books"><img title='{{book.volumeInfo.description}}' class="animate-repeat" ng-src='{{book.volumeInfo.imageLinks.thumbnail}}'><td>
-                        <td class="align_top"><p><span class="book_title">{{book.volumeInfo.title}}</span><br>
-                            {{book.volumeInfo.authors[0]}}</p></td>
-                    </tr>
-                  </table>
-                    
-                    SEARCH - WILL BE ADD NEW BOOK
-                    <input ng-model="search" ng-change="searchBooks()" ng-model-options="{debounce: 1000}" type="text"></input>
-                    <div ng-repeat="item in results">
-                        <p>{{item.volumeInfo.title}}<br>
-                        by {{item.volumeInfo.authors[0]}}</p>
-                        <img title='{{item.volumeInfo.description}}' ng-src='{{item.volumeInfo.imageLinks.smallThumbnail}}'>
-                    </div>
-                </section>
+                <!-- Current Book : Left column, 5 col wide -->
+                <?php include("partials/current_book.php"); ?>
+
+                <!-- Read Books : Right column, 7 col wide -->
+                <?php include("partials/read_books.php"); ?>
             </div>
+            
+            <!-- Footer -->
+            <?php include("partials/footer.php"); ?>
         </div>
     </div>
 </body>

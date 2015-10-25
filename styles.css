@@ -46,10 +46,9 @@ nav ul li img
     width: 10%;
 }
 
-.read_books img
+.read_books_img
 {
-    width: 100%;
-    max-height: 100%;
+    max-height: 150px;
 }
 
 .align_top
@@ -64,17 +63,24 @@ nav ul li img
     font-size: 14px;
 }
 
+.scroll-y
+{
+    overflow-y: auto;
+}
+
 .animate-repeat
 {
-    max-height: 100px;
-    max-width: 100px;
+    max-height: 150px;
+    overflow-y: auto;
 }
+
 .animate-repeat.ng-move,
 .animate-repeat.ng-enter,
 .animate-repeat.ng-leave 
 {
-  transition:all linear 1.0s;
-  -webkit-transition: 1.0s linear all;
+  transition:all linear 0.5s;
+  -webkit-transition: 0.5s linear all;
+
 }
 
 .animate-repeat.ng-leave.ng-leave-active,
@@ -82,7 +88,8 @@ nav ul li img
 .animate-repeat.ng-enter 
 {
   opacity:0;
-  max-width: 0px;
+  max-height: 0px;
+
 }
 
 .animate-repeat.ng-leave,
@@ -90,5 +97,6 @@ nav ul li img
 .animate-repeat.ng-enter.ng-enter-active 
 {
   opacity:1;
-  max-width: 100px;
+  max-height: 150px;
+
 }
