@@ -17,7 +17,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.js"></script>
-    <script src="js/app.js"></script>
+    <script src="app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
 </head>
