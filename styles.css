@@ -1,0 +1,109 @@
+body
+{
+    background-image: url("images/paper-background.jpg");
+}
+
+header img
+{
+    width: 100%;
+}
+
+header form
+{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+nav ul
+{
+    list-style: none;
+}
+
+nav ul li
+{
+    width: 10%;
+    float: left;
+}
+
+nav ul li img
+{
+    width: 100%;
+}
+
+#main_content
+{
+    clear: both;
+}
+
+#main_content div
+{
+    
+}
+
+.read_books
+{
+    width: 10%;
+}
+
+.read_books_img
+{
+    max-height: 150px;
+}
+
+.align_top
+{
+    vertical-align: top;
+    padding: 3px;
+}
+
+.btn-center
+{
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10px;
+    width: 40%;
+}
+.book_title
+{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.scroll-y
+{
+    overflow-y: auto;
+}
+
+.animate-repeat
+{
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave 
+{
+  transition:all linear 0.5s;
+  -webkit-transition: 0.5s linear all;
+
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter 
+{
+  opacity:0;
+  max-height: 0px;
+
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active 
+{
+  opacity:1;
+  max-height: 150px;
+
+}
