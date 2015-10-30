@@ -4,7 +4,7 @@ var appControllers = angular.module('appControllers', ['appServices']);
 /* Create the controllers for projectApp */
 
 //Controller for home
-appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', 'user', function($scope, googleBooks, bcs, user)
+appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', 'user', '$cookies', function($scope, googleBooks, bcs, user, $cookies)
 {
     //Set initial signed_in status = false
     $scope.signed_in = false;
@@ -16,10 +16,15 @@ appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', 'us
     bcs.user_check()
     .then(function(result)
     {
-        console.log(result);
+
         $scope.signed_in = true;
+                
     });
     
+            var cookies = $cookies.getAll();
+        
+        console.log(cookies);
+        
     //test api call
     googleBooks.book_by_id("xQxhQgAACAAJ")
     .then(function(result)
@@ -39,19 +44,14 @@ appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', 'us
     //Sign In
     $scope.sign_in = function()
     {
-        //bcs.sign_in_user($scope.user.name, $scope.user.password)
-        user.userLogin($scope.user)
+        bcs.sign_in_user($scope.user.name, $scope.user.password)
+        //user.userLogin($scope.user)
         .then(function(result)
         {
             $scope.signed_in = true;
             $scope.user = result;
             
-                        bcs.user_check()
-    .then(function(result)
-    {
-        console.log(result);
-        $scope.signed_in = true;
-    });
+            bcs.user_check()
         },
         function(result)
         {

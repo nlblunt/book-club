@@ -1,5 +1,5 @@
 //Initialize the angularJS services
-var appServices = angular.module('appServices', []);
+var appServices = angular.module('appServices', ['ngResource']);
 
 appServices.factory('user', function($resource, $q)
 {
@@ -31,6 +31,17 @@ appServices.factory('user', function($resource, $q)
 	return self;
 });
 
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
 appServices.service('bcs', function($http, $q)
 {
     //Get server status
@@ -39,7 +50,7 @@ appServices.service('bcs', function($http, $q)
         var defer = $q.defer();
         
         //$http.get('https://bcs.rubywebs.net/status_check')
-        $http.get('https://bcs-nlblunt.c9.io/status_check')
+        $http.get('https://bcs-nlblunt.c9.io/status_check.json')
         .then(function(result)
         {
             defer.resolve(result);
@@ -81,8 +92,18 @@ appServices.service('bcs', function($http, $q)
     {
         var defer = $q.defer();
         
+        var token = readCookie("XSRF-TOKEN");
+        console.log(token);
+        
         //$http.post('https://bcs.rubywebs.net/users/sign_in', {username: uname, password: pword, password_confirmation: pword})
-        $http.post('https://bcs-nlblunt.c9.io/users/sign_in', {username: uname, password: pword, password_confirmation: pword})
+        $http(
+            {
+                method: 'POST',
+                url: 'https://bcs-nlblunt.c9.io/users/sign_in', 
+                params: {username: uname, password: pword, password_confirmation: pword},
+                withCredentials: true,
+                headers: {'X-XSRF-TOKEN' : 'aaaa'}
+            })
         .then(function(result)
         {
             defer.resolve(result);
@@ -140,3 +161,19 @@ appServices.service('googleBooks', function($http, $q)
              return defer.promise;
     };
 });
+
+
+
+
+appServices.factory(['XSRFInterceptor', function() {
+    var XSRFInterceptor = {
+        request: function(config) {
+            var token = readCookie('XSRF-TOKEN');
+            if (token) {
+                config.headers['X-XSRF-TOKEN'] = token;
+            }
+            return config;
+        }
+    };
+    return XSRFInterceptor;
+}]);
