@@ -8,8 +8,7 @@ appServices.service('bcs', function($http, $q)
     {
         var defer = $q.defer();
         
-        //$http.get('https://bcs.rubywebs.net/status_check')
-        $http.get('https://bcs-nlblunt.c9.io/status_check')
+        $http.get('https://bcs.rubywebs.net/status_check')
         .then(function(result)
         {
             defer.resolve(result);
@@ -27,7 +26,7 @@ appServices.service('bcs', function($http, $q)
     {
         var defer = $q.defer();
         
-        $http.get('https://bcs-nlblunt.c9.io/user_check', {withCredentials: true})
+        $http.get('https://bcs.rubywebs.net/user_check', {withCredentials: true})
         .then(function(result)
         {
             defer.resolve(result);
@@ -55,7 +54,7 @@ appServices.service('bcs', function($http, $q)
         $http(
             {
                 method: 'POST',
-                url: 'https://bcs-nlblunt.c9.io/users/sign_in', 
+                url: 'https://bcs.rubywebs.net/users/sign_in', 
                 params: {username: uname, password: pword},
             })
         .then(function(result)
