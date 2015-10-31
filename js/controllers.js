@@ -4,7 +4,7 @@ var appControllers = angular.module('appControllers', ['appServices']);
 /* Create the controllers for projectApp */
 
 //Controller for home
-appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', 'user', '$cookies', function($scope, googleBooks, bcs, user, $cookies)
+appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', '$cookies', function($scope, googleBooks, bcs, $cookies)
 {
     //Set initial signed_in status = false
     $scope.signed_in = false;

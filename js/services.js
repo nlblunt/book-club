@@ -55,7 +55,8 @@ appServices.service('bcs', function($http, $q)
             {
                 method: 'POST',
                 url: 'https://bcs.rubywebs.net/users/sign_in', 
-                params: {username: uname, password: pword},
+                //params: {username: uname, password: pword},
+                data: {username: uname, password: pword}
             })
         .then(function(result)
         {
