@@ -14,7 +14,7 @@
 	projectApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider)
 	{
 		
-		$locationProvider.hashPrefix('!');
+		//$locationProvider.hashPrefix('!');
 
 		$routeProvider.when('/',
 		{
