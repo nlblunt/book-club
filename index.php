@@ -2,16 +2,19 @@
 
 <html ng-app="projectApp">
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     
     <!-- Load jQuery -->
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
     
     <!-- Latest compiled and minified Bootstrap JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js"></script>
     <!-- Start AngularJS -->
     <!-- <script src="../AngularJS/angular-1.4.7/angular.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
@@ -46,14 +49,28 @@
              <!-- Horizontal Navbar -->
              <?php include("partials/nav.php"); ?> 
             
-            <!-- Row for main content -->
-            <div class="row" id="main_content">
+            <!-- Row for MAIN CONTENT -->
+            <div class="row" id="main_content" ng-show="stage == 'main_content'">
                 
                 <!-- Current Book : Left column, 5 col wide -->
                 <?php include("partials/current_book.php"); ?>
 
                 <!-- Read Books : Right column, 7 col wide -->
                 <?php include("partials/read_books.php"); ?>
+            </div>
+            
+            <!-- Row for ADD BOOK -->
+            <div class="row" id="add_book" ng-show="stage == 'add_book'">
+                <!-- Search bar for book search, both local and google -->
+                <form class="form">
+                    <input class="form-control" ng-model="search" ng-change="searchBooks()" ng-model-options="{debounce: 1000}" type="text"></input>
+                </form>
+                <br>
+                <!-- Books on Server : Left column, 6 col wide -->
+                <?php include("partials/server_books.php"); ?>
+                
+                <!-- Book search from Google Books : Right Column, 6 col wide -->
+                <?php include("partials/google_books.php"); ?>
             </div>
             
             <!-- Footer -->

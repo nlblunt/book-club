@@ -8,7 +8,7 @@ appServices.service('bcs', function($http, $q)
     {
         var defer = $q.defer();
         
-        $http.get('https://bcs.rubywebs.net/status_check')
+        $http.get('http://bcs.rubywebs.net/status_check')
         .then(function(result)
         {
             defer.resolve(result);
@@ -26,7 +26,7 @@ appServices.service('bcs', function($http, $q)
     {
         var defer = $q.defer();
         
-        $http.get('https://bcs.rubywebs.net/user_check', {withCredentials: true})
+        $http.get('http://bcs.rubywebs.net/user_check', {withCredentials: true})
         .then(function(result)
         {
             defer.resolve(result);
@@ -54,11 +54,49 @@ appServices.service('bcs', function($http, $q)
         $http(
             {
                 method: 'POST',
-                url: 'https://bcs.rubywebs.net/users/sign_in', 
+                url: 'http://bcs.rubywebs.net/users/sign_in', 
                 //params: {username: uname, password: pword},
                 data: {username: uname, password: pword}
             })
         .then(function(result)
+        {
+            defer.resolve(result.data);
+        },
+        function(result)
+        {
+            defer.reject(result.data.e);
+        });
+        
+        return defer.promise;
+    };
+    
+    this.get_server_books = function()
+    {
+        var defer = $q.defer();
+        
+        $http.get("https://bcs-nlblunt.c9.io/list_books")//"http://bcs.rubywebs.net/list_books")
+        .then(function(result)
+        {
+            defer.resolve(result.data);
+        },
+        function(result)
+        {
+            defer.reject(result.data.e);
+        });
+        
+            return defer.promise;
+    };
+    
+    this.add_book_from_google = function(user, book, finished)
+    {
+        console.log(book)
+        var defer = $q.defer();
+        
+        $http.post("https://bcs-nlblunt.c9.io/add_book_google", //("http://bcs.rubywebs.net/add_book_google", 
+        {book:{title: book.title, author: book.author, description: book.description,
+            cover: book.cover,
+            pages: book.pages, google_id: book.google_id}
+        }).then(function(result)
         {
             defer.resolve(result);
         },

@@ -25,12 +25,4 @@
             </p>
         </div>
     </div>
-    
-    SEARCH - WILL BE ADD NEW BOOK
-    <input ng-model="search" ng-change="searchBooks()" ng-model-options="{debounce: 1000}" type="text"></input>
-    <div ng-repeat="item in results">
-        <p>{{item.volumeInfo.title}}<br>
-        by {{item.volumeInfo.authors[0]}}</p>
-        <img title='{{item.volumeInfo.description}}' ng-src='{{item.volumeInfo.imageLinks.smallThumbnail}}'>
-    </div>
 </section>
