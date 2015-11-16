@@ -87,13 +87,13 @@ appServices.service('bcs', function($http, $q)
             return defer.promise;
     };
     
-    this.add_book_from_google = function(user, book, finished)
+    this.add_book_from_google = function(book, user_id)
     {
         console.log(book)
         var defer = $q.defer();
         
         $http.post("https://bcs-nlblunt.c9.io/add_book_google", //("http://bcs.rubywebs.net/add_book_google", 
-        {book:{title: book.title, author: book.author, description: book.description,
+        {user_id: user_id, book:{title: book.title, author: book.author, description: book.description,
             cover: book.cover,
             pages: book.pages, google_id: book.google_id}
         }).then(function(result)

@@ -80,12 +80,16 @@ appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', '$c
         }
     };
     
+    //Check to see if the book has already been added to users shelf
     $scope.added = function(book)
     {
+        //FAKE SHELF.  GET REAL GOOGLE_BOOK IDS FROM USER SHEVES
         var ids = [{id: "xQxhQgAACAAJ"}, {id: "H1w9AwAAQBAJ"}];
         
+        //Compare IDS from user shelves against search returns
         var res = $.grep(ids, function(e){return e.id == book.id});
         
+        //If res > 0, then the book ID is in a shelf.  Return 1 so the book is ommited from the results
         if(res.length > 0)
         {
             console.log("Book Found");
@@ -95,9 +99,9 @@ appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', '$c
         return 0;
     };
     
+    //Search Google Books
     $scope.searchBooks = function()
     {
-        //Search Google Books
         googleBooks.book_by_name($scope.search)
         .then(function(result)
         {
@@ -108,6 +112,8 @@ appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', '$c
         $scope.server_books = $scope.hidden_server_books;
     };
     
+    //Add a book to the server from Google Books and assign to users shelf
+    //and finished state
     $scope.addBookFromGoogle = function(book, finished)
     {
         var new_book = 
@@ -119,13 +125,20 @@ appControllers.controller('homeController', ['$scope', 'googleBooks', 'bcs', '$c
                 pages: book.volumeInfo.pageCount, 
                 google_id: book.id
             };
-            
-        bcs.add_book_from_google(1, new_book, finished)
+        
+        //Add test user
+        var test_user_id = 1;
+        
+        //Add the book to the server
+        bcs.add_book_from_google(new_book, test_user_id)// $scope.user.id)
         .then(function(result)
         {
-            console.log($scope.server_books);
+            //SUCCUSSFUL
+            //Push book to server_books to avoid unncessary server book call
             $scope.server_books.push(new_book);
-            console.log($scope.server_books);
+            
+            //Add new_book to users default shelf with read / reading status
+            
         },
         function(result)
         {
