@@ -1,4 +1,5 @@
 <section class="col-md-6">
+    <h2>Books Found on Google</h2>
     <article class="media animate-repeat" ng-repeat="book in results | limitTo: 5">
         <div ng-if="added(book) === 0">
             <div class="media-left">
@@ -12,7 +13,7 @@
                 Rating: {{book.volumeInfo.averageRating}}
                 <progress class="progress progress-striped progress-info" value='{{book.volumeInfo.averageRating}}' max="5">{{book.volumeInfo.averageRating}}</progress>
                 <button class="btn btn-link" ng-click="addBookFromGoogle(book, 'false')">Currently Reading</button>
-                <button class="btn btn-link" ng-click="addBookFromGoogle('true')">Finished</button>
+                <button class="btn btn-link" ng-click="addBookFromGoogle(book, 'true')">Finished</button>
                 </p>
             </div>
         </div>

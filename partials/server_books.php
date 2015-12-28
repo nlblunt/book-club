@@ -1,4 +1,5 @@
 <div class="col-md-6">
+    <h2>Books On Server</h2>
     <div class="media animate-repeat" ng-repeat="book in server_books | filter: search | limitTo: 5">
         <div class="media-left">
             <img class="media-object read_books_img" ng-src='{{book.cover}}'>

@@ -55,8 +55,11 @@
                 <!-- Current Book : Left column, 5 col wide -->
                 <?php include("partials/current_book.php"); ?>
 
+                <div class="col-md-4">
+                    <iframe width="420" height="315" src="https://www.youtube.com/embed/844DzynPG-w" frameborder="0" allowfullscreen></iframe>
+                </div>
                 <!-- Read Books : Right column, 7 col wide -->
-                <?php include("partials/read_books.php"); ?>
+                <!-- ?php include("partials/read_books.php"); ?> -->
             </div>
             
             <!-- Row for ADD BOOK -->
@@ -73,8 +76,23 @@
                 <?php include("partials/google_books.php"); ?>
             </div>
             
+            <!-- Row for BOOKSHELVES -->
+            <div class="row" id="bookshelves" ng-show="stage == 'bookshelves'">
+                <!-- Bookshelf list for user : 4 col wide -->
+                <?php include("partials/bookshelf_list.php"); ?>
+                
+                <!-- Books on selected bookshelf : 8 col wide -->
+                <?php include("partials/bookshelf_books.php"); ?>
+            </div>
+            
+            <!-- Row for FORUM -->
+            <div class="row" id="forum" ng-show="stage == 'forum'">
+                <!-- Forum : 12 col wide -->
+                <?php include("partials/forum.php"); ?>
+            </div>
+            
             <!-- Footer -->
-            <?php include("partials/footer.php"); ?>
+            
         </div>
     </div>
 </body>

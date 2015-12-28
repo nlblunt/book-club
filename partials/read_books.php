@@ -1,4 +1,4 @@
-<section class="col-md-7">
+<section class="col-md-0">
     <h3 class="text-center">Books I've Read</h3>
     <p class="text-center">
         <a href class="hidden-print" ng-click="searchShowRead()">Search</a>

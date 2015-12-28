@@ -3,15 +3,14 @@
                 
                 <!-- Show if Not Signed in -->
                 <form ng-hide="signed_in" id="form-sign-in">
+                    <p class="text-center">Username: demo, Password: password</p>
                     <div class="form-group">
                         <label>Username</label>
-                        <input placeholder="MyUsername" ng-model="user.name" type="text" class="form-control">
+                        <input placeholder="My Username" ng-model="user.name" type="text" class="form-control">
                         <label>Password</label>
-                        <input placeholder="someone@somewhere.com" ng-model="user.password" type="password" class="form-control">
+                        <input placeholder="password" ng-model="user.password" type="password" class="form-control">
                         <button ng-click="sign_in()" class="btn btn-center btn-success">Sign In</button>
                     </div>
-                    
-                    <p class="text-center">New to this? <a href> Sign Up Now</a></p>
                 </form>
 
             </header>

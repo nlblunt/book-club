@@ -54,7 +54,8 @@ appServices.service('bcs', function($http, $q)
         $http(
             {
                 method: 'POST',
-                url: 'http://bcs.rubywebs.net/users/sign_in', 
+                //url: 'http://bcs.rubywebs.net/users/sign_in',
+                url: 'https://bcs-nlblunt.c9.io/users/sign_in',
                 //params: {username: uname, password: pword},
                 data: {username: uname, password: pword}
             })
@@ -64,7 +65,7 @@ appServices.service('bcs', function($http, $q)
         },
         function(result)
         {
-            defer.reject(result.data.e);
+            defer.reject(result.data);
         });
         
         return defer.promise;
@@ -87,13 +88,13 @@ appServices.service('bcs', function($http, $q)
             return defer.promise;
     };
     
-    this.add_book_from_google = function(book, user_id)
+    this.add_book_from_google = function(book, user_id, finished)
     {
-        console.log(book)
+        console.log(book);
         var defer = $q.defer();
         
         $http.post("https://bcs-nlblunt.c9.io/add_book_google", //("http://bcs.rubywebs.net/add_book_google", 
-        {user_id: user_id, book:{title: book.title, author: book.author, description: book.description,
+        {user_id: user_id, finished: finished, book:{title: book.title, author: book.author, description: book.description,
             cover: book.cover,
             pages: book.pages, google_id: book.google_id}
         }).then(function(result)
@@ -103,6 +104,82 @@ appServices.service('bcs', function($http, $q)
         function(result)
         {
             defer.reject(result);
+        });
+        
+        return defer.promise;
+    };
+    
+    //Gets a list of ALL user books
+    this.get_user_books = function(user_id)
+    {
+        var defer = $q.defer();
+        
+        $http.post("https://bcs-nlblunt.c9.io/get_user_books", //("http://bcs.rubywebs.net/get_user_books",
+        {
+            user_id: user_id
+        }).then(function(result)
+        {
+            defer.resolve(result.data);
+        },
+        function(result)
+        {
+            defer.reject(result.data);
+        });
+        
+        return defer.promise;
+    };
+    
+    //Gets a list of only CURRENTLY READING books
+    this.get_user_current_books = function(user_id)
+    {
+        var defer = $q.defer();
+        
+        $http.post("https://bcs-nlblunt.c9.io/get_current_books", //("http://bcs.rubywebs.net/get_user_books",
+        {
+            user_id: user_id
+        }).then(function(result)
+        {
+            defer.resolve(result.data);
+        },
+        function(result)
+        {
+            defer.reject(result.data);
+        });
+        
+        return defer.promise;
+    };
+    
+    this.get_book_forum = function(book_id)
+    {
+        var defer = $q.defer();
+        
+        $http.get("https://bcs-nlblunt.c9.io/get_book_forum", {params:{book_id: book_id}})
+        .then(function(result)
+        {
+            defer.resolve(result.data);
+        },
+        function(result)
+        {
+            defer.reject(result.data);
+        });
+        
+        return defer.promise;
+    };
+    
+    this.add_post = function(book_id, title, body, user_id)
+    {
+        var defer = $q.defer();
+        
+        $http.post("https://bcs-nlblunt.c9.io/add_post",
+        {
+            book_id: book_id, post_title: title, post_body: body, user_id: user_id
+        }).then(function(result)
+        {
+            defer.resolve(result.data);
+        },
+        function(result)
+        {
+            defer.reject(result.data);
         });
         
         return defer.promise;
